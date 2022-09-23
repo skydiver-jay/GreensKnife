@@ -1,0 +1,40 @@
+# coding=utf-8
+import argparse
+import requests
+import urllib3
+from urllib3.exceptions import InsecureRequestWarning
+urllib3.disable_warnings(InsecureRequestWarning)
+
+
+def req(url):
+    data="$body"
+    proxy='$proxy'
+    proxies = {'http': 'http://'+proxy, 'https': 'http://'+proxy}
+    headers = $headers
+    h1=""
+    try:
+        h1 = requests.$ff(url+"$path",data=data,
+                      verify=False, timeout=5,headers=headers,proxies=proxies)
+    except  Exception as e:
+        print(e)
+        return  None
+    h1.encoding = "utf-8"
+    if $yz:
+        print("[+]漏洞存在:" + url)
+        with open('success.txt', 'a+') as f:
+            f.write(url)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description="这么说你很勇哦")
+    parser.add_argument('-u', '--url', help="目标url，例:https://www.target.com")
+    parser.add_argument('-f', '--file', help="目标url文件，一行一个")
+    args = parser.parse_args()
+    if args.url != None:
+        req(str(args.url))
+
+    if args.file != None:
+        f = open(str(args.file), 'r')
+        for target in f.readlines():
+            req(target.strip())
