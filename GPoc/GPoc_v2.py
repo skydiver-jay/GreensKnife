@@ -20,9 +20,11 @@ sp_6 = " ".encode()
 # reqf为请求文件路径
 # chk/st/prx，string类型的输入需要全部转为byte类型
 def get_poc_binay(reqf, chk=None, st=None, prx=None):
-    chk = chk.encode()
+    if chk is not None:
+        chk = chk.encode()
     st = st.encode()
-    prx = prx.encode()
+    if prx is not None:
+        prx = prx.encode()
 
     with open(reqf, 'rb') as f0:
         content = f0.read()
@@ -211,22 +213,5 @@ if __name__ == '__main__':
                 get_poc_normal(request_file, st=str(200), prx=args.proxy)
         else:
             print("mode仅支持’0‘或’1‘")
-
-        # with open(request_file, 'rb') as f1:
-        #     text = f1.read()
-        #     f1.seek(0)
-        #     if sp_0 in f1.readline():
-        #         line_break = sp_0
-        #     else:
-        #         line_break = sp_1
-        # f1.close()
-        # # print("处理request数据包")
-        # if args.checker is not None or args.status is not None:
-        #     print("响应关键字：", args.checker)
-        #     print("响应码：", args.status)
-        #     get_poc_binay(text, args.checker, str(args.status), args.proxy, line_break)
-        # else:
-        #     print("默认使用响应码200作为判定")
-        #     get_poc_binay(text, st=str(200), prx=args.proxy, lb=line_break)
     else:
         print("请求文件不存在")
