@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="mimilib.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="utils.c" />
+    <ClCompile Include="kssp.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="kssp.h" />
+  </ItemGroup>
+</Project>
